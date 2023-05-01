@@ -1,5 +1,5 @@
-import { SignUpContainer, ButtonContainer } from "./sign-in.style.jsx";
-import { useState } from "react";
+import { SignUpContainer, ButtonContainer } from "./sign-in.style";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import {} from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
@@ -26,13 +26,13 @@ const SignUpForm = () => {
     dispatch(googleSignInStart());
   };
 
-  const handleFormFieldChange = (e) => {
+  const handleFormFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -40,18 +40,7 @@ const SignUpForm = () => {
 
       resetUserData();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("incorrect password for e-mail");
-          break;
-
-        case "auth/user-not-found":
-          alert("incorrect e-mail");
-          break;
-
-        default:
-          console.log(error);
-      }
+      console.log("User Sign in Failed", error);
     }
   };
 

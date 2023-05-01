@@ -1,4 +1,10 @@
-export const categoryItems = [
+export type CategoryItems = {
+  id: number;
+  title: string;
+  imageUrl: string;
+  route: string;
+};
+export const categoryItems: CategoryItems[] = [
   {
     id: 1,
     title: "hats",

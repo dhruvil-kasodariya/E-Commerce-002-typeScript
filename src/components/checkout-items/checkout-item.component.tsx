@@ -5,7 +5,7 @@ import {
   removeItemFromCart,
   clearItemFromCart,
 } from "../../store/cart/cart.action";
-
+import { CartItem as TCartItem } from "../../store/cart/cart.type";
 import {
   RemoveButton,
   Value,
@@ -14,9 +14,14 @@ import {
   ItemLeble,
   ImageContainer,
   CheckoutItemContainer,
-} from "./checkout-item.styles.jsx";
+} from "./checkout-item.styles";
+import { FC } from "react";
 
-const CheckoutItem = ({ cartItem }) => {
+type CheckOutProps = {
+  cartItem: TCartItem;
+};
+
+const CheckoutItem: FC<CheckOutProps> = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   const cartItems = useSelector(selectCartItems);
