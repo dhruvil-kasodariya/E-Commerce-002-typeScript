@@ -1,21 +1,32 @@
 import { AnyAction } from "redux";
-import { Category } from "./category.types";
+import { Category, PriceRange } from "./category.types";
 import {
   fetchCategoriceFailed,
   fetchCategoriceStart,
   fetchCategoriceSuccess,
+  searchStringAction,
+  priceRangeAction,
 } from "./category.action";
 
 export type CategoriesState = {
   readonly categories: Category[];
   readonly isLoading: boolean;
   readonly error: Error | null;
+  readonly searchString: string;
+  readonly priceRange: PriceRange;
 };
 
 export const CATEGORIES_INITIAL_STATE: CategoriesState = {
   categories: [],
   isLoading: false,
   error: null,
+  searchString: "",
+  priceRange: {
+    value: "",
+    label: "",
+    startValue: 0,
+    endValue: 2000000,
+  },
 };
 
 export const categoriesReducer = (
@@ -31,6 +42,12 @@ export const categoriesReducer = (
 
   if (fetchCategoriceFailed.match(action)) {
     return { ...state, error: action.payload, isLoading: false };
+  }
+  if (searchStringAction.match(action)) {
+    return { ...state, searchString: action.payload };
+  }
+  if (priceRangeAction.match(action)) {
+    return { ...state, priceRange: action.payload };
   }
 
   return state;

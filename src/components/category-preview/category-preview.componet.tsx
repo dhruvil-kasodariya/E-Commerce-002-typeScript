@@ -25,10 +25,12 @@ const CategoryPreview: FC<CategoryPreviewProps> = ({ title, products }) => {
       </h2>
       <Preview>
         {products
-          .filter((_, idx) => idx < 4)
-          .map((product) => (
-            <ProductCart key={product.id} product={product} />
-          ))}
+          ? products
+              .filter((_, idx) => idx < 4)
+              .map((product) => (
+                <ProductCart key={product.id} product={product} />
+              ))
+          : "No Match Found"}
       </Preview>
     </CategoryPreviewContainer>
   );

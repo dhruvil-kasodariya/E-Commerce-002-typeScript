@@ -31,10 +31,11 @@ const Category = () => {
         <Spinner />
       ) : (
         <CategoryContainer>
-          {product &&
-            product.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          {product
+            ? product.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            : "No Match Found"}
         </CategoryContainer>
       )}
     </Fragment>

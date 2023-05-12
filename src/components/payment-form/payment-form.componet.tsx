@@ -6,6 +6,8 @@ import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   PaymentFormContainer,
@@ -60,18 +62,17 @@ const PaymentForm = () => {
     });
     setIsProcessingPayment(false);
     if (paymentResult.error) {
-      alert(paymentResult.error.message);
-      console.log(paymentResult.error);
+      toast.error(paymentResult.error.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
-        alert("Payment success");
+        toast.success("Payment success", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
-
-  // const clientSecret =response.paymentIntent.client_secret;
-
-  // console.log(clientSecret);
 
   return (
     <PaymentFormContainer>
@@ -85,6 +86,7 @@ const PaymentForm = () => {
           Pay now
         </PaymentButton>
       </FormContainer>
+      <ToastContainer />
     </PaymentFormContainer>
   );
 };

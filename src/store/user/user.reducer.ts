@@ -7,6 +7,7 @@ import {
   signInFailed,
   signUpFailed,
 } from "./user.action";
+import { toast } from "react-toastify";
 
 export type UserState = {
   readonly currentUser: UserData | null;
@@ -22,12 +23,18 @@ const INITIAL_STATE: UserState = {
 
 export const userReducer = (state = INITIAL_STATE, action: AnyAction) => {
   if (signInSuccess.match(action)) {
+    toast.success("Sign in Success", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     return {
       ...state,
       currentUser: action.payload,
     };
   }
   if (signOutSuccess.match(action)) {
+    toast.success("Sign Out Success", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     return {
       ...state,
       currentUser: null,
@@ -38,6 +45,9 @@ export const userReducer = (state = INITIAL_STATE, action: AnyAction) => {
     signUpFailed.match(action) ||
     signOutFailed.match(action)
   ) {
+    toast.error(action.payload.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
     return { ...state, error: action.payload };
   }
 
