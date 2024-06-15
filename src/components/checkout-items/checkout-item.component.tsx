@@ -47,6 +47,7 @@ const CheckoutItem: FC<CheckOutProps> = memo(({ cartItem }) => {
         <Arrow onClick={addItemHandler}>&#10095;</Arrow>
       </Quantity>
       <ItemLeble>{price}</ItemLeble>
+      <ItemLeble>{price * quantity}</ItemLeble>
       <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
   );
