@@ -32,6 +32,9 @@ const Checkout = () => {
         <HeaderBlock>
           <span>Price</span>
         </HeaderBlock>
+             <HeaderBlock>
+          <span>Sub Total</span>
+        </HeaderBlock>
         <HeaderBlock>
           <span>Remove</span>
         </HeaderBlock>
